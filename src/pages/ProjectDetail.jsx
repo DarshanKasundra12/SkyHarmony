@@ -17,6 +17,34 @@ const ProjectDetail = () => {
   const [fpZoom, setFpZoom] = useState(1);
   const [isMobileDevice, setIsMobileDevice] = useState(false);
   const fpRef = useRef(null);
+  const [initialTouchDist, setInitialTouchDist] = useState(0);
+  const [initialZoom, setInitialZoom] = useState(1);
+
+  const handleFpTouchStart = (e) => {
+    if (e.touches.length === 2 && isFloorPlanOpen) {
+      const dist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY,
+      );
+      setInitialTouchDist(dist);
+      setInitialZoom(fpZoom);
+    }
+  };
+
+  const handleFpTouchMove = (e) => {
+    if (e.touches.length === 2 && initialTouchDist > 0 && isFloorPlanOpen) {
+      const dist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY,
+      );
+      const ratio = dist / initialTouchDist;
+      setFpZoom(Math.min(Math.max(initialZoom * ratio, 1), 4));
+    }
+  };
+
+  const handleFpTouchEnd = () => {
+    setInitialTouchDist(0);
+  };
 
   useEffect(() => {
     setIsMobileDevice(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
@@ -51,12 +79,9 @@ const ProjectDetail = () => {
   }, [project]);
 
   useEffect(() => {
-    if (isFloorPlanOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-  }, [isFloorPlanOpen]);
+    // We allow page scrolling even when floor plan is previewed
+    document.body.style.overflow = "auto";
+  }, []);
 
   if (!project)
     return (
@@ -92,7 +117,7 @@ const ProjectDetail = () => {
     setFpZoom((prev) => {
       const step = 0.1; // Precise 10% steps
       const newZoom = delta > 0 ? prev - step : prev + step;
-      return Math.min(Math.max(newZoom, 1), 2); // Locked between 100% (1) and 200% (2)
+      return Math.min(Math.max(newZoom, 1), 4); // Locked between 100% (1) and 400% (4)
     });
   };
 
@@ -108,8 +133,14 @@ const ProjectDetail = () => {
     >
       <Helmet>
         <title>{`${project.title} - Premium ${project.type} in ${project.location}`}</title>
-        <meta name="description" content={`Discover ${project.title} by ${project.developer}. ${project.subtitle} in ${project.location}. Featuring ${project.type} configurations starting from ${project.priceRange}. Ready to move options available.`} />
-        <meta name="keywords" content={`${project.title}, ${project.location}, ${project.developer}, ${project.type} flats Ahmedabad, Ready to move vastral`} />
+        <meta
+          name="description"
+          content={`Discover ${project.title} by ${project.developer}. ${project.subtitle} in ${project.location}. Featuring ${project.type} configurations starting from ${project.priceRange}. Ready to move options available.`}
+        />
+        <meta
+          name="keywords"
+          content={`${project.title}, ${project.location}, ${project.developer}, ${project.type} flats Ahmedabad, Ready to move vastral`}
+        />
       </Helmet>
 
       {/* HERO SECTION - CINEMATIC ENTRANCE */}
@@ -140,33 +171,35 @@ const ProjectDetail = () => {
         <div className="container pd-master-grid">
           {/* LEFT CONTENT COLUMN */}
           <div className="pd-content-col">
-                        <div className="pd-glass-card pd-reveal-line">
-                            <div className="pd-card-beam" />
-                            <h3 className="pd-section-header">PROJECT ARCHITECTURE</h3>
-                            <p className="pd-description">{project.overview}</p>
-                            
-                            <div className="pd-highlights-container">
-                                {project.highlights.map((h, i) => (
-                                    <div key={i} className="pd-highlight-item">
-                                        <span className="pd-h-dot">◈</span>
-                                        <span className="pd-h-text">{h}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+            <div className="pd-glass-card pd-reveal-line">
+              <div className="pd-card-beam" />
+              <h3 className="pd-section-header">PROJECT ARCHITECTURE</h3>
+              <p className="pd-description">{project.overview}</p>
 
-                        <div className="pd-glass-card pd-reveal-line">
-                            <div className="pd-card-beam" />
-                            <h3 className="pd-section-header">TECHNICAL SPECIFICATIONS</h3>
-                            <div className="pd-spec-grid">
-                                {Object.entries(project.specifications).map(([key, val], i) => (
-                                    <div key={i} className="pd-spec-item">
-                                        <span className="pd-spec-category">{key.toUpperCase()}</span>
-                                        <p className="pd-spec-val">{val}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+              <div className="pd-highlights-container">
+                {project.highlights.map((h, i) => (
+                  <div key={i} className="pd-highlight-item">
+                    <span className="pd-h-dot">◈</span>
+                    <span className="pd-h-text">{h}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="pd-glass-card pd-reveal-line">
+              <div className="pd-card-beam" />
+              <h3 className="pd-section-header">TECHNICAL SPECIFICATIONS</h3>
+              <div className="pd-spec-grid">
+                {Object.entries(project.specifications).map(([key, val], i) => (
+                  <div key={i} className="pd-spec-item">
+                    <span className="pd-spec-category">
+                      {key.toUpperCase()}
+                    </span>
+                    <p className="pd-spec-val">{val}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
 
             <div className="pd-amenities-card-container pd-reveal-line">
               <h3 className="pd-section-header">LIFESTYLE & AMENITIES</h3>
@@ -341,29 +374,33 @@ const ProjectDetail = () => {
                 className="pd-mobile-fp-close"
                 onClick={() => setIsFloorPlanOpen(false)}
               >
-                ✕
+                Close
               </button>
 
               <div
                 className="pd-fp-lightbox-viewport"
                 ref={fpRef}
                 onWheel={handleFpWheel}
+                onTouchStart={handleFpTouchStart}
+                onTouchMove={handleFpTouchMove}
+                onTouchEnd={handleFpTouchEnd}
               >
                 <motion.div
                   className="pd-fp-zoom-container"
                   drag={fpZoom > 1}
                   dragConstraints={{
-                    left: -600,
-                    right: 600,
-                    top: -600,
-                    bottom: 600,
+                    left: -(370 * (fpZoom - 1)) / 2,
+                    right: (370 * (fpZoom - 1)) / 2,
+                    top: -(281 * (fpZoom - 1)) / 2,
+                    bottom: (281 * (fpZoom - 1)) / 2,
                   }}
-                  dragElastic={0.1}
+                  dragElastic={0.05}
                   dragMomentum={true}
                   style={{
                     width: `${fpZoom * 100}%`,
                     height: `${fpZoom * 100}%`,
                     cursor: fpZoom > 1 ? "move" : "default",
+                    touchAction: fpZoom > 1 ? "none" : "pan-y",
                   }}
                   whileTap={{ cursor: "grabbing" }}
                 >
@@ -406,6 +443,8 @@ const ProjectDetail = () => {
       </section>
 
       <style>{`
+                .pd-mobile-fp-close { display: none; }
+
                 .pd-page-wrapper {
                     background-color: #0b0b0e !important;
                     min-height: 100vh;
@@ -996,34 +1035,63 @@ const ProjectDetail = () => {
                     .pd-modal-toolbar { padding: 1rem; flex-direction: column; gap: 1rem; }
                     .pd-modal-actions { width: 100%; justify-content: space-between; }
 
-                    .pd-fp-lightbox-content { height: 100vh; width: 100%; border-radius: 0; }
-                    .pd-fp-lightbox-toolbar { display: none; }
-                    .pd-fp-lightbox-viewport { background: #fff; }
-                    .pd-mobile-fp-close { 
+                    .pd-fp-lightbox-overlay { 
+                        background: rgba(255, 255, 255, 0); 
+                        padding: 20px; 
                         display: flex; 
-                        position: fixed; 
-                        top: 25px; 
-                        right: 25px; 
+                        flex-direction: column; 
+                        align-items: center; 
+                        justify-content: center; 
+                        backdrop-filter: blur(20px);
+                        pointer-events: none;
+                    }
+                    .pd-fp-lightbox-content { 
+                        height: 281px; 
+                        width: 370px; 
+                        max-width: 95vw; 
+                        border-radius: 16px; 
+                        background: #fff; 
+                        box-shadow: 0 40px 100px rgba(0,0,0,0.15);
+                        border: 1px solid rgba(0,0,0,0.05);
+                        overflow: hidden;
+                        display: flex;
+                        flex-direction: column;
+                        position: relative;
+                        pointer-events: auto;
+                    }
+                    .pd-fp-lightbox-toolbar { display: none; }
+                    .pd-fp-lightbox-viewport { 
+                        background: #fff; 
+                        flex: 1;
+                        height: 100%;
+                        width: 100%;
+                    }
+                    .pd-mobile-fp-close { 
+                        display: flex;
+                        position: relative;
+                        margin: 0 auto 15px auto;
                         z-index: 9999;
-                        width: 48px;
-                        height: 48px;
-                        background: rgba(10, 10, 14, 0.85);
+                        padding: 12px 30px;
+                        background: #111;
                         color: var(--primary-gold);
                         border: 2px solid var(--primary-gold);
-                        border-radius: 50%;
+                        border-radius: 12px;
                         align-items: center;
                         justify-content: center;
-                        font-size: 1.4rem;
+                        font-size: 0.9rem;
                         font-weight: 800;
-                        backdrop-filter: blur(15px);
-                        box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 15px rgba(212, 175, 55, 0.3);
+                        letter-spacing: 0.05rem;
+                        text-transform: uppercase;
+                        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+                        pointer-events: auto;
                         transition: all 0.3s ease;
                     }
                     .pd-mobile-fp-close:active {
-                        transform: scale(0.9);
+                        transform: scale(0.95);
                         background: var(--primary-gold);
                         color: #000;
                     }
+                    .pd-fp-zoom-img { max-width: 100%; max-height: 100%; }
                 }
 
                 @media (max-width: 480px) {
@@ -1035,8 +1103,6 @@ const ProjectDetail = () => {
                     .pd-fp-viewport { height: 200px; padding: 1rem; }
                     .pd-sum-row { padding: 0.8rem 0; }
                 }
-
-                .pd-mobile-fp-close { display: none; }
             `}</style>
     </motion.div>
   );

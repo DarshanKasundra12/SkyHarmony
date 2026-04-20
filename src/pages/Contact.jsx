@@ -26,7 +26,7 @@ const Contact = () => {
     }, []);
 
     const openWhatsApp = () => {
-        window.open('https://wa.me/919876543210?text=I%20would%20like%20to%20inquire%20about%20your%20projects.', '_blank');
+        window.open('https://wa.me/919712909405?text=I%20would%20like%20to%20inquire%20about%20your%20projects.', '_blank');
     };
 
     return (
@@ -51,14 +51,11 @@ const Contact = () => {
                              <h4 className="con-detail-label">OFFICE HEADQUARTERS</h4>
                              <p className="con-detail-value">Balaji Construction Hub, <br /> Near SP Ring Road, <br /> Vastral, Ahmedabad - 382418</p>
                          </div>
-                         <div className="con-detail-row con-stagger-item">
-                             <h4 className="con-detail-label">DIRECT CONTACT</h4>
-                             <p className="con-detail-value">+91 98765 43210 <br /> +91 91234 56789</p>
-                         </div>
                          <div className="con-detail-row con-stagger-item border-none">
-                             <h4 className="con-detail-label">DIGITAL CORRESPONDENCE</h4>
-                             <p className="con-detail-value">sales@balajiconstruction.com <br /> info@balajiconstruction.com</p>
+                             <h4 className="con-detail-label">DIRECT CONTACT</h4>
+                             <p className="con-detail-value">+91 97129 09405</p>
                          </div>
+
                     </div>
                 </div>
 
@@ -78,11 +75,11 @@ const Contact = () => {
                                 <input type="text" placeholder="Your esteemed name" className="con-input" />
                                 <div className="con-input-baseline" />
                             </div>
-                            <div className="con-input-block">
-                                <label>EMAIL ADDRESS</label>
-                                <input type="email" placeholder="email@example.com" className="con-input" />
-                                <div className="con-input-baseline" />
-                            </div>
+                             <div className="con-input-block">
+                                 <label>PHONE NUMBER</label>
+                                 <input type="tel" placeholder="+91 XXXXX XXXXX" className="con-input" />
+                                 <div className="con-input-baseline" />
+                             </div>
                             <div className="con-input-block">
                                 <label>PROJECT INTEREST</label>
                                 <textarea rows="3" placeholder="Tell us about the bespoke requirements you seek..." className="con-input textarea"></textarea>

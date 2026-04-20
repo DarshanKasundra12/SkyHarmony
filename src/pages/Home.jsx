@@ -8,21 +8,49 @@ const Home = () => {
     window.scrollTo(0, 0);
 
     const tl = gsap.timeline();
+    
+    // 1. Image Cinematic Scale-Down
+    tl.fromTo(
+      ".hero-image-fit",
+      { scale: 1.3, filter: "brightness(0.2) blur(10px)" },
+      { scale: 1, filter: "brightness(0.6) blur(0px)", duration: 2.5, ease: "power2.out" }
+    );
+
+    // 2. Text Content Reveal (Layered)
     tl.fromTo(
       ".reveal-inner",
-      { y: "100%" },
-      { y: "0%", duration: 1.5, stagger: 0.1, ease: "power4.out", delay: 0.5 },
-    ).fromTo(
+      { y: "120%", skewY: 7, opacity: 0 },
+      { 
+        y: "0%", 
+        skewY: 0, 
+        opacity: 1, 
+        duration: 2, 
+        stagger: 0.15, 
+        ease: "power4.out" 
+      },
+      "-=2" // Starts while image is still scaling
+    );
+
+    // 3. Gold Glimmer Effect
+    tl.fromTo(
+      ".h-title.gold",
+      { letterSpacing: "1rem", opacity: 0 },
+      { letterSpacing: "0.2rem", opacity: 1, duration: 1.5, ease: "expo.out" },
+      "-=1.5"
+    );
+
+    // 4. CTA Smooth Glide
+    tl.fromTo(
       ".hero-cta-box",
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, ease: "power3.out" },
-      "-=0.8",
+      { y: 50, opacity: 0, scale: 0.9 },
+      { y: 0, opacity: 1, scale: 1, duration: 1.5, ease: "power3.out" },
+      "-=1"
     );
   }, []);
 
   const openWhatsApp = () => {
     window.open(
-      "https://wa.me/919876543210?text=I%20am%20interested%20in%20Balaji%20Sky%20Harmony.%20Please%20share%20more%20details.",
+      "https://wa.me/919712909405?text=I%20am%20interested%20in%20Balaji%20Sky%20Harmony.%20Please%20share%20more%20details.",
       "_blank",
     );
   };
@@ -32,7 +60,7 @@ const Home = () => {
       <section className="hero-section">
         <div className="media-container">
           <img
-            src="/assets/hero.png"
+            src="/assets/FrontViewBuilding.webp"
             alt="Balaji Sky Harmony"
             className="hero-image-fit"
           />
@@ -41,7 +69,7 @@ const Home = () => {
 
         <div className="hero-content">
           <div className="reveal">
-            <h1 className="reveal-inner h-title">A SYMPHONY OF</h1>
+            <h1 className="reveal-inner h-title">A SKY-HARMONY OF</h1>
           </div>
           <div className="reveal">
             <h1 className="reveal-inner h-title gold">LUXURY LIVING</h1>

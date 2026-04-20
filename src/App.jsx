@@ -37,7 +37,6 @@ const AppContent = () => {
 
     // Refresh scroll on route change
     setTimeout(() => {
-      scrollInstance.update();
       window.scrollTo(0, 0);
     }, 500);
 
@@ -69,20 +68,20 @@ const AppContent = () => {
           <div className="marquee-content">
             <span>BALAJI SKY HARMONY</span>
             <span className="marquee-dot">•</span>
-            <span>ULTRA LUXURY LIVING</span>
-            <span className="marquee-dot">•</span>
-            <span>ARCHITECTURAL BRILLIANCE</span>
+            <span>BALAJI SKY HARMONY</span>
             <span className="marquee-dot">•</span>
             <span>BALAJI SKY HARMONY</span>
             <span className="marquee-dot">•</span>
-            <span>ULTRA LUXURY LIVING</span>
+            <span>BALAJI SKY HARMONY</span>
+            <span className="marquee-dot">•</span>
+            <span>BALAJI SKY HARMONY</span>
             <span className="marquee-dot">•</span>
             {/* Duplicated for seamless infinite loop */}
             <span>BALAJI SKY HARMONY</span>
             <span className="marquee-dot">•</span>
-            <span>ULTRA LUXURY LIVING</span>
+            <span>BALAJI SKY HARMONY</span>
             <span className="marquee-dot">•</span>
-            <span>ARCHITECTURAL BRILLIANCE</span>
+            <span>BALAJI SKY HARMONY</span>
             <span className="marquee-dot">•</span>
           </div>
         </div>
@@ -185,23 +184,16 @@ const AppContent = () => {
               <p className="f-address-text">
                 Balaji Hub, SP Ring Road,
                 <br />
-                Vastral, Ahmedabad 382418 
+                Vastral, Ahmedabad 382418
                 <br />
                 Gujarat, India.
               </p>
               <motion.a
-                href="tel:+919876543210"
+                href="tel:+919712909405"
                 className="f-link-item f-bold"
                 whileHover={{ x: -10, color: "#d4af37" }}
               >
-                +91 98765 43210
-              </motion.a>
-              <motion.a
-                href="mailto:info@balajiconstruction.com"
-                className="f-link-item"
-                whileHover={{ x: -10, color: "#d4af37" }}
-              >
-                info@balajiconstruction.com
+                +91 97129 09405
               </motion.a>
             </div>
           </div>
@@ -214,22 +206,48 @@ const AppContent = () => {
               <span style={{ color: "var(--primary-gold)" }}>CONSTRUCTION</span>
             </div>
             <div className="f-social-magnetic">
-              <motion.a href="#" whileHover={{ y: -5, color: "#d4af37" }}>
+              <motion.a
+                href="https://www.instagram.com/_sky_harmony/"
+                target="_blank"
+                whileHover={{ y: -5, color: "#d4af37" }}
+              >
                 IG
               </motion.a>
-              <motion.a href="#" whileHover={{ y: -5, color: "#d4af37" }}>
+              <motion.a
+                href="https://www.facebook.com/people/Sky_Harmony/100092701151889/"
+                target="_blank"
+                whileHover={{ y: -5, color: "#d4af37" }}
+              >
                 FB
               </motion.a>
               <motion.a href="#" whileHover={{ y: -5, color: "#d4af37" }}>
                 IN
               </motion.a>
-              <motion.a href="#" whileHover={{ y: -5, color: "#25D366" }}>
+              <motion.a
+                href="https://wa.me/919712909405"
+                target="_blank"
+                whileHover={{ y: -5, color: "#25D366" }}
+              >
                 WA
               </motion.a>
             </div>
             <div className="f-copyright">
               © 2026. SECURING THE HORIZON.
-              <a href="#">LEGAL</a> • <a href="#">PRIVACY</a>
+              <br />
+              <span className="f-serviatech-credit">
+                POWERED BY{" "}
+                <a
+                  href="https://serviatech.vercel.app"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="serviatech-link"
+                >
+                  SERVIATECH
+                </a>
+              </span>
+              <div className="f-legal-links">
+                <a href="#">LEGAL</a> • <a href="#">PRIVACY</a>
+              </div>
             </div>
           </div>
         </div>
@@ -287,7 +305,7 @@ const AppContent = () => {
             -webkit-text-stroke: 1px rgba(255,255,255,0.15);
             letter-spacing: 0.15rem;
             text-transform: uppercase;
-            animation: scrollMarquee 30s linear infinite;
+            animation: scrollMarquee 15s linear infinite;
         }
 
         @keyframes scrollMarquee {
@@ -481,15 +499,32 @@ const AppContent = () => {
             letter-spacing: 0.15rem;
         }
 
-        .f-copyright a {
-            color: rgba(255,255,255,0.6) !important;
-            text-decoration: none;
-            margin-left: 0.5rem;
-            transition: color 0.3s;
-        }
-        
         .f-copyright a:hover {
             color: var(--primary-gold) !important;
+        }
+
+        .f-serviatech-credit {
+            font-size: 0.65rem;
+            letter-spacing: 0.2rem;
+            color: rgba(255,255,255,0.3) !important;
+            margin: 0.8rem 0;
+            display: block;
+        }
+
+        .serviatech-link {
+            color: var(--primary-gold) !important;
+            text-decoration: none;
+            font-weight: 800;
+            transition: all 0.3s;
+        }
+
+        .serviatech-link:hover {
+            text-shadow: 0 0 10px rgba(212,175,55,0.4);
+            letter-spacing: 0.25rem;
+        }
+
+        .f-legal-links {
+            margin-top: 0.5rem;
         }
 
         @media (max-width: 1024px) {

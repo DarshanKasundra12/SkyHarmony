@@ -1,39 +1,133 @@
+import brochurePdfFile from "../assets/Balaji-Sky-Harmony-Brochure.pdf";
+
 export const projectsData = [
   {
     id: "sky-harmony",
     title: "BALAJI SKY HARMONY",
     subtitle: "A Sanctuary of Modern Living",
     location: "Vastral, Ahmedabad East",
-    status: "UNDER CONSTRUCTION",
-    possession: "MARCH 2028",
+    address:
+      "Opp. Madhav Farm, Behind Reliance Petrol Pump, Vastral, Ahmedabad",
+    pincode: "382418",
+    developer: "Balaji Construction",
+
+    status: "Ready to Move",
+    launchDate: "MAY 2023",
+    possession: "June 2025",
+
     priceRange: "34.12 L - 47.27 L",
+    avgPrice: "₹5,500 / sq.ft",
+    emiStarts: "₹18,070 / month",
+
     type: "2 & 3 BHK",
-    mainImage: "/assets/hero.png",
+    configurations: ["2 BHK", "3 BHK"],
+
+    unitSizes: "620 - 859 sq.ft",
+    carpetArea: "620 - 859 sq.ft",
+
+    mainImage: "/assets/FrontViewBuilding.webp",
+
     gallery: [
-      "/assets/amenity_clubhouse.png",
-      "/assets/amenity_rooftop.png",
-      "/assets/amenity_gym.png",
-      "/assets/construction_bg.png"
+      "/assets/FrontViewBuilding.webp",
+      "/assets/SideViewGarden.webp",
+      "/assets/HeroImage.webp",
+      "/assets/GateImage.webp",
+      "/assets/BackViewGround.webp",
+      "/assets/ChildrenPlayArea.webp",
     ],
-    floorPlan: "/assets/floor_plan.png",
-    overview: "Balaji Sky Harmony is an upcoming under-construction housing society in Ahmedabad East. It offers apartments for sale in Vastral. Spanning 1.41 acres with 3 towers of 12 floors each, this project ensures a high-end lifestyle with the safety of a gated community.",
+
+    floorPlans: [
+      { 
+        type: "2 BHK", 
+        image: "/assets/2BHKFloor.png", 
+        area: "Approx. 620 - 650 sq.ft (Carpet)", 
+        desc: "Spacious and ventilated 2 BHK layout designed for comfort." 
+      },
+      { 
+        type: "3 BHK", 
+        image: "/assets/3BHKFloor.png", 
+        area: "Approx. 820 - 859 sq.ft (Carpet)", 
+        desc: "Premium 3 BHK configuration with expansive living areas." 
+      }
+    ],
+    brochurePdf: brochurePdfFile,
+
+    overview:
+      "Balaji Sky Harmony is a premium residential project located in Vastral, Ahmedabad East. Spread across a thoughtfully planned gated community, this project offers spacious 2 & 3 BHK apartments with modern amenities, quality construction, and excellent connectivity to metro, schools, hospitals, and shopping hubs.",
+
+    highlights: [
+      "Just 2 KM from Vastral Gam Metro Station",
+      "Earthquake-resistant RCC structure",
+      "Automatic high-speed lifts",
+      "24x7 water supply",
+      "Fire sprinklers & fire fighting system",
+      "Solar power system",
+      "Granite kitchen platform with steel sink",
+      "Premium vitrified tile flooring",
+    ],
+
     amenities: [
-      { name: "Luxury Clubhouse", icon: "🏠", desc: "A place for social gatherings and elite lifestyle." },
-      { name: "Rooftop Garden", icon: "🌿", desc: "Green spaces with a panoramic view of the city." },
-      { name: "Modern Fitness", icon: "🏋️", desc: "Equipped with state-of-the-art gym machines." },
-      { name: "24/7 Security", icon: "🛡️", desc: "Advanced CCTV and manned security cabins." },
-      { name: "Fire Safety", icon: "🔥", desc: "Comprehensive fire fighting system for every tower." },
-      { name: "Parking", icon: "🚗", desc: "Ample car parking for residents and visitors." },
-      { name: "Kids Zone", icon: "🎡", desc: "Dedicated safe play area for children." },
-      { name: "High-speed Lifts", icon: "🛗", desc: "Automatic elevators with emergency power back-up." }
+      {
+        name: "Security Cabin",
+        icon: "🛡️",
+        image: "/assets/GateImage.webp",
+        desc: "Dedicated security cabin with gated access and architecture.",
+      },
+      {
+        name: "Front View",
+        icon: "🏢",
+        image: "/assets/FrontViewBuilding.webp",
+        desc: "Stunning modern architectural facade.",
+      },
+      {
+        name: "Children Play Area",
+        icon: "🎡",
+        image: "/assets/ChildrenPlayArea.webp",
+        desc: "Safe and vibrant zone for children to explore.",
+      },
+      {
+        name: "Residential Towers",
+        icon: "🛗",
+        image: "/assets/SideViewGarden.webp",
+        desc: "Modern automatic lifts and wide lobbies.",
+      },
+      {
+        name: "Rear Entrance",
+        icon: "🚗",
+        image: "/assets/BackViewGround.webp",
+        desc: "Easy access gates for smooth traffic flow.",
+      },
+      {
+        name: "24x7 Security",
+        icon: "🚨",
+        image: "/assets/GateImage.webp",
+        desc: "Round-the-clock security surveillance.",
+      },
+      {
+        name: "Water Supply",
+        icon: "💧",
+        image: "/assets/HeroImage.webp",
+        desc: "Continuous water availability and storage.",
+      },
+      {
+        name: "Luxury Living",
+        icon: "✨",
+        image: "/assets/HeroImage.webp",
+        desc: "Experience the pinnacle of high-end design.",
+      },
     ],
-    details: [
-      { label: "Total Towers", value: "3 Majestic Towers" },
-      { label: "Total Floors", value: "12 Residential Floors" },
-      { label: "Total Units", value: "Approximately 180" },
-      { label: "Plot Area", value: "1.41 Acres" },
-      { label: "RERA ID", value: "PR/GJ/AMBAD/AUDA/MAA11383/" }
-    ],
+
+    specifications: {
+      structure: "Earthquake resistant RCC frame structure",
+      flooring: "Vitrified tiles in all rooms",
+      kitchen: "Granite platform with SS sink and glazed tiles up to lintel level",
+      doors: "Elegant main door and internal flush doors",
+      windows: "Powder coated aluminum sliding windows",
+      plumbing: "Concealed plumbing with premium quality sanitary ware",
+      electrification: "Concealed copper wiring with modular switches",
+      paint: "Internal putty finish and external weather-resistant paint"
+    },
+
     whatsappMsg: "Hi Balaji Construction, I am interested in BALAJI SKY HARMONY. Please send me more details about availability and floor plans."
   }
 ];

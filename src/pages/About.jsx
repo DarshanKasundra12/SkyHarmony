@@ -53,7 +53,7 @@ const About = () => {
     }, []);
 
     const openWhatsApp = () => {
-        window.open('https://wa.me/919876543210?text=I%20am%20interested%20in%20knowing%20more%20about%20your%20projects.', '_blank');
+        window.open('https://wa.me/919712909405?text=I%20am%20interested%20in%20knowing%20more%20about%20your%20projects.', '_blank');
     };
 
     return (

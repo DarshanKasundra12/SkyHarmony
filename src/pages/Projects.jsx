@@ -57,7 +57,7 @@ const Projects = () => {
   }, []);
 
   const openWhatsApp = (project) => {
-    window.open(`https://wa.me/919876543210?text=${encodeURIComponent(project.whatsappMsg)}`, '_blank');
+    window.open(`https://wa.me/919712909405?text=${encodeURIComponent(project.whatsappMsg)}`, '_blank');
   };
 
   return (

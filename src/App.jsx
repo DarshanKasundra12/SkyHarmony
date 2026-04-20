@@ -14,6 +14,7 @@ import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
 import ProjectDetail from "./pages/ProjectDetail";
 import CustomCursor from "./components/CustomCursor";
+import { Analytics } from "@vercel/analytics/react";
 import "./styles/global.css";
 import "./styles/components.css";
 
@@ -87,6 +88,17 @@ const AppContent = () => {
         </div>
 
         <div className="container footer-content-grid">
+          <div className="f-brand-box">
+            <img
+              src="/SHLOGO.png"
+              alt="SkyHarmony Luxury Logo"
+              className="footer-logo-main"
+            />
+            <h2 className="footer-brand-text">
+              BALAJI <br />
+              <span className="gold">SKY HARMONY</span>
+            </h2>
+          </div>
           {/* Added Newsletter Subscription Content */}
           <div className="f-exclusive-club">
             <h3 className="f-sub-title">JOIN THE ELITE CIRCLE</h3>
@@ -331,42 +343,81 @@ const AppContent = () => {
         }
 
         /* Content Layout */
+        .f-brand-box {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            // align-items: flex-start;
+        }
+
+        .footer-logo-main {
+            height: 150px;
+            width: auto;
+            object-fit: contain;
+            mix-blend-mode: screen;
+            margin-left: -15px;
+            transition: all 0.5s ease;
+        }
+
+        .footer-logo-main:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .footer-brand-text {
+            font-family: 'Noto Serif', serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: 0.1rem;
+            color: #fff;
+        }
+
+        .footer-brand-text .gold {
+            color: var(--primary-gold);
+        }
+
         .footer-content-grid {
             position: relative;
             z-index: 10;
             display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 8rem;
+            grid-template-columns: 1fr 1.2fr 1.1fr; /* Symmetrical architectural balance */
+            gap: 6rem;
             padding: 8rem 0;
+            align-items: flex-start;
         }
 
-        /* Newsletter Block */
+        /* Newsletter Block - Center Anchor */
         .f-exclusive-club {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
 
         .f-sub-title {
-            font-size: 1.5rem;
+            font-family: 'Noto Serif', serif;
+            font-size: 1.8rem;
             font-weight: 800;
-            letter-spacing: 0.2rem;
+            letter-spacing: 0.1rem;
             margin-bottom: 1.5rem;
             color: #fff !important;
+            text-transform: uppercase;
         }
 
         .f-sub-desc {
-            font-size: 1rem;
-            line-height: 1.8;
-            color: rgba(255,255,255,0.5) !important;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.4) !important;
             margin-bottom: 2.5rem;
+            max-width: 350px;
         }
 
         .f-sub-form {
+            width: 100%;
             display: flex;
-            border-bottom: 2px solid rgba(255,255,255,0.2);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
             padding-bottom: 0.5rem;
-            transition: border-color 0.4s;
+            transition: all 0.3s ease;
         }
 
         .f-sub-form:focus-within {
@@ -378,13 +429,12 @@ const AppContent = () => {
             background: transparent;
             border: none;
             color: #fff !important;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             outline: none;
         }
 
         .f-sub-input::placeholder {
-            color: rgba(255,255,255,0.3) !important;
-            letter-spacing: 0.1rem;
+            color: rgba(255,255,255,0.2) !important;
         }
 
         .f-sub-btn {
@@ -392,17 +442,36 @@ const AppContent = () => {
             color: var(--primary-gold) !important;
             border: none;
             font-weight: 800;
-            letter-spacing: 0.15rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.2rem;
             cursor: pointer;
             padding: 0 1rem;
         }
 
-        /* Links Grid */
+        /* Headquarters Block - Right Anchor */
         .f-links-grid {
             display: flex;
-            justify-content: flex-end; /* Starts right to left */
-            gap: 4rem;
-            text-align: right; /* Aligns text to the right */
+            flex-direction: column;
+            align-items: flex-end; /* Sharp right alignment */
+            text-align: right;
+            gap: 2rem;
+        }
+
+        .f-col-header {
+            font-family: 'Noto Serif', serif;
+            font-size: 0.75rem;
+            color: var(--primary-gold) !important;
+            letter-spacing: 0.3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .f-address-text {
+            color: rgba(255,255,255,0.5) !important;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
         }
 
         .f-col-header {
@@ -528,9 +597,15 @@ const AppContent = () => {
         }
 
         @media (max-width: 1024px) {
-            .footer-content-grid { grid-template-columns: 1fr; gap: 5rem; padding: 6rem 5%; }
-            .f-links-grid { grid-template-columns: 1fr 1fr; }
+            .footer-content-grid { grid-template-columns: 1fr; gap: 5rem; padding: 6rem 5%; text-align: center; }
+            .f-brand-box { align-items: center; text-align: center; }
+            .footer-logo-main { height: 100px; margin-left: 0; }
+            .footer-brand-text { font-size: 1.4rem; }
+            .f-exclusive-club { align-items: center; }
+            .f-links-grid { align-items: center; text-align: center; }
+            .f-col-header { margin-bottom: 1.5rem; text-align: center; }
             .f-bottom-flex { flex-direction: column; text-align: center; }
+            .f-address-text { font-size: 0.85rem; }
         }
       `}</style>
     </div>

@@ -32,6 +32,7 @@ const Navbar = () => {
       <nav className={`navbar ${scrolled ? 'nav-scrolled' : ''}`}>
         <div className="navbar-container">
           <Link to="/" className="nav-logo">
+            <img src="/SHLOGO.png" alt="Balaji Sky Harmony" className="nav-logo-img" />
             BALAJI <span className="gold">SKY HARMONY</span>
           </Link>
           <div className="nav-links">

@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { projectsData } from '../data/projects';
+import { Helmet } from 'react-helmet-async';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -61,7 +62,17 @@ const Projects = () => {
   };
 
   return (
-    <div className="port-page-body" ref={pageRef}>
+    <motion.div 
+      className="projects-page-wrapper"
+      ref={pageRef}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <Helmet>
+        <title>Our Projects | Balaji Construction - Real Estate Portfolio Ahmedabad</title>
+        <meta name="description" content="Explore the portfolio of Balaji Construction. Featured premium projects including Balaji Sky Harmony in Vastral, Ahmedabad. High-end residential developments with modern architecture." />
+      </Helmet>
       
       {/* Background Architectural Elements */}
       <div className="port-bg-lines" />
@@ -382,7 +393,7 @@ const Projects = () => {
           .port-proj-title { font-size: 2.2rem; }
         }
       `}</style>
-    </div>
+    </motion.div>
   );
 };
 

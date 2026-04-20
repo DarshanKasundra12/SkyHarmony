@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   useEffect(() => {
@@ -61,7 +62,7 @@ const Home = () => {
         <div className="media-container">
           <img
             src="/assets/FrontViewBuilding.webp"
-            alt="Balaji Sky Harmony"
+            alt="Balaji Sky Harmony Luxury Apartment Building Facade in Vastral Ahmedabad East"
             className="hero-image-fit"
           />
           <div className="hero-dark-overlay" />

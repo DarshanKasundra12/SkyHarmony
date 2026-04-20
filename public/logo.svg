@@ -1,0 +1,8 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="120" fill="#0B0B0E"/>
+  <!-- Stylized Architectural 'SH' -->
+  <path d="M160 380V132M160 256H352M352 132V380" stroke="#D4AF25" stroke-width="32" stroke-linecap="round"/>
+  <path d="M160 132C160 132 200 100 256 100C312 100 352 132 352 132" stroke="#D4AF25" stroke-width="32" stroke-linecap="round"/>
+  <path d="M256 100V420" stroke="#D4AF25" stroke-width="12" stroke-dasharray="20 20"/>
+  <path d="M130 380H382" stroke="#D4AF25" stroke-width="16" stroke-linecap="round"/>
+</svg>

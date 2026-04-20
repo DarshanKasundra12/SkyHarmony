@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { projectsData } from "../data/projects";
+import { Helmet } from "react-helmet-async";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -105,11 +106,17 @@ const ProjectDetail = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
+      <Helmet>
+        <title>{`${project.title} - Premium ${project.type} in ${project.location}`}</title>
+        <meta name="description" content={`Discover ${project.title} by ${project.developer}. ${project.subtitle} in ${project.location}. Featuring ${project.type} configurations starting from ${project.priceRange}. Ready to move options available.`} />
+        <meta name="keywords" content={`${project.title}, ${project.location}, ${project.developer}, ${project.type} flats Ahmedabad, Ready to move vastral`} />
+      </Helmet>
+
       {/* HERO SECTION - CINEMATIC ENTRANCE */}
       <div className="pd-hero-container">
         <motion.img
           src={project.mainImage}
-          alt={project.title}
+          alt={`Front view of ${project.title} luxury apartment building in ${project.location}`}
           className="pd-hero-bg"
           initial={{ scale: 1.2, filter: "brightness(0.3)" }}
           animate={{ scale: 1, filter: "brightness(0.6)" }}
@@ -254,7 +261,7 @@ const ProjectDetail = () => {
                   >
                     <img
                       src={project.floorPlans[activeFloorPlan].image}
-                      alt="Floor Plan"
+                      alt={`${project.title} ${project.floorPlans[activeFloorPlan].type} Floor Plan layout in ${project.location}`}
                       className="pd-fp-img"
                       draggable="false"
                       onContextMenu={(e) => e.preventDefault()}
@@ -362,7 +369,7 @@ const ProjectDetail = () => {
                 >
                   <img
                     src={project.floorPlans[activeFloorPlan].image}
-                    alt="Zoomed Floor Plan"
+                    alt={`${project.title} detailed ${project.floorPlans[activeFloorPlan].type} architectural drawing and carpet area`}
                     className="pd-fp-zoom-img"
                     draggable="false"
                     onContextMenu={(e) => e.preventDefault()}
@@ -387,7 +394,7 @@ const ProjectDetail = () => {
               >
                 <img
                   src={img}
-                  alt="Gallery"
+                  alt={`Architectural render of ${project.title} - View ${i + 1} of portfolio gallery`}
                   className="pd-gallery-img"
                   draggable="false"
                   onContextMenu={(e) => e.preventDefault()}

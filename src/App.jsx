@@ -89,15 +89,18 @@ const AppContent = () => {
 
         <div className="container footer-content-grid">
           <div className="f-brand-box">
+            <a href="/">
             <img
               src="/SHLOGO.png"
               alt="SkyHarmony Luxury Logo"
               className="footer-logo-main"
             />
-            <h2 className="footer-brand-text">
-              BALAJI <br />
-              <span className="gold">SKY HARMONY</span>
-            </h2>
+            
+              <h2 className="footer-brand-text">
+                BALAJI <br />
+                <span className="gold">SKY HARMONY</span>
+              </h2>
+            </a>
           </div>
           {/* Added Newsletter Subscription Content */}
           <div className="f-exclusive-club">
@@ -213,10 +216,12 @@ const AppContent = () => {
 
         <div className="f-bottom-bar">
           <div className="container f-bottom-flex">
+            <a href="/">
             <div className="f-logo-mark">
               BALAJI{" "}
               <span style={{ color: "var(--primary-gold)" }}>CONSTRUCTION</span>
             </div>
+            </a>
             <div className="f-social-magnetic">
               <motion.a
                 href="https://www.instagram.com/_sky_harmony/"

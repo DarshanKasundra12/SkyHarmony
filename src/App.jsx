@@ -130,69 +130,37 @@ const AppContent = () => {
           </div>
 
           <div className="f-links-grid">
-            {/* <div className="f-link-column">
-              <h4 className="f-col-header">PROPERTIES</h4>
-              <motion.a
-                href="#"
+            <div className="f-link-column">
+              <h4 className="f-col-header">QUICK LINKS</h4>
+              <motion.a 
+                href="/" 
                 className="f-link-item"
-                whileHover={{ x: 10, color: "#d4af37" }}
+                whileHover={{ x: -10, color: "var(--primary-gold)" }}
               >
-                Ongoing Projects
+                HOME
               </motion.a>
-              <motion.a
-                href="#"
+              <motion.a 
+                href="/projects" 
                 className="f-link-item"
-                whileHover={{ x: 10, color: "#d4af37" }}
+                whileHover={{ x: -10, color: "var(--primary-gold)" }}
               >
-                Completed Projects
+                PORTFOLIO
               </motion.a>
-              <motion.a
-                href="#"
+              <motion.a 
+                href="/about" 
                 className="f-link-item"
-                whileHover={{ x: 10, color: "#d4af37" }}
+                whileHover={{ x: -10, color: "var(--primary-gold)" }}
               >
-                Future Visions
+                THE LEGACY
               </motion.a>
-              <motion.a
-                href="#"
+              <motion.a 
+                href="/contact" 
                 className="f-link-item"
-                whileHover={{ x: 10, color: "#d4af37" }}
+                whileHover={{ x: -10, color: "var(--primary-gold)" }}
               >
-                Commercial Spaces
+                CONNECT
               </motion.a>
             </div>
-
-            <div className="f-link-column">
-              <h4 className="f-col-header">ENTERPRISE</h4>
-              <motion.a
-                href="/about"
-                className="f-link-item"
-                whileHover={{ x: 10, color: "#d4af37" }}
-              >
-                The Legacy
-              </motion.a>
-              <motion.a
-                href="#"
-                className="f-link-item"
-                whileHover={{ x: 10, color: "#d4af37" }}
-              >
-                Leadership Team
-              </motion.a>
-              <motion.a
-                href="#"
-                className="f-link-item"
-                whileHover={{ x: 10, color: "#d4af37" }}
-              >
-                Investor Relations
-              </motion.a>
-              <motion.a
-                href="#"
-                className="f-link-item"
-                whileHover={{ x: 10, color: "#d4af37" }}
-              >
-                Careers
-              </motion.a>
-            </div> */}
 
             <div className="f-link-column">
               <h4 className="f-col-header">HEADQUARTERS</h4>
@@ -458,10 +426,15 @@ const AppContent = () => {
         /* Headquarters Block - Right Anchor */
         .f-links-grid {
             display: flex;
+            justify-content: flex-end;
+            gap: 4rem;
+        }
+
+        .f-link-column {
+            display: flex;
             flex-direction: column;
-            align-items: flex-end; /* Sharp right alignment */
+            align-items: flex-end;
             text-align: right;
-            gap: 2rem;
         }
 
         .f-col-header {
@@ -470,7 +443,7 @@ const AppContent = () => {
             color: var(--primary-gold) !important;
             letter-spacing: 0.3rem;
             font-weight: 800;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             text-transform: uppercase;
         }
 
@@ -603,13 +576,24 @@ const AppContent = () => {
             margin-top: 0.5rem;
         }
 
+        .footer-content-grid {
+            position: relative;
+            z-index: 10;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr 1.8fr; /* Responsive architectural balance */
+            gap: 6rem;
+            padding: 8rem 0;
+            align-items: flex-start;
+        }
+
         @media (max-width: 1024px) {
             .footer-content-grid { grid-template-columns: 1fr; gap: 5rem; padding: 6rem 5%; text-align: center; }
             .f-brand-box { align-items: center; text-align: center; }
             .footer-logo-main { height: 100px; margin-left: 0; }
             .footer-brand-text { font-size: 1.4rem; }
             .f-exclusive-club { align-items: center; }
-            .f-links-grid { align-items: center; text-align: center; }
+            .f-links-grid { flex-direction: column; align-items: center; text-align: center; gap: 4rem; }
+            .f-link-column { align-items: center; text-align: center; }
             .f-col-header { margin-bottom: 1.5rem; text-align: center; }
             .f-bottom-flex { flex-direction: column; text-align: center; }
             .f-address-text { font-size: 0.85rem; }

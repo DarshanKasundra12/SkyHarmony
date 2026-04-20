@@ -433,8 +433,8 @@ const AppContent = () => {
         .f-link-column {
             display: flex;
             flex-direction: column;
-            align-items: flex-end;
-            text-align: right;
+            // align-items: flex-end;
+            text-align: center;
         }
 
         .f-col-header {
@@ -472,8 +472,8 @@ const AppContent = () => {
             letter-spacing: 0.05rem;
             cursor: pointer;
             position: relative;
-            width: fit-content;
-            margin-left: auto; /* Required for right-alignment to work with fit-content */
+            // width: fit-content;
+            // margin-left: auto; /* Required for right-alignment to work with fit-content */
         }
 
         .f-link-item.f-bold {

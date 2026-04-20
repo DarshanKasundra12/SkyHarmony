@@ -148,7 +148,7 @@ const About = () => {
                     background-color: #0b0b0e !important;
                     min-height: 100vh;
                     width: 100%;
-                    overflow: hidden;
+                    overflow-x: hidden;
                     text-align: center;
                 }
 

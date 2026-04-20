@@ -170,11 +170,11 @@ const Projects = () => {
       </section>
 
       <style>{`
-        .port-page-body {
+        .projects-page-wrapper {
           background-color: #08080a !important;
           min-height: 100vh;
           width: 100%;
-          overflow: hidden;
+          overflow-x: hidden;
           position: relative;
         }
 

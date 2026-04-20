@@ -129,7 +129,7 @@ const Home = () => {
         .home-wrapper {
           width: 100%;
           background: #0d0d0f;
-          overflow: hidden;
+          overflow-x: hidden;
         }
 
         .hero-section {

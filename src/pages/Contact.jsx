@@ -114,7 +114,7 @@ const Contact = () => {
                     background-color: #0b0b0e !important;
                     min-height: 100vh;
                     width: 100%;
-                    overflow: hidden;
+                    overflow-x: hidden;
                     position: relative;
                     padding-top: 15vh;
                     padding-bottom: 8rem;

@@ -30,8 +30,8 @@ const AppContent = () => {
       lerp: 0.1,
       multiplier: 1,
       touchMultiplier: 2,
-      smartphone: { smooth: true },
-      tablet: { smooth: true },
+      smartphone: { smooth: false },
+      tablet: { smooth: false },
     });
 
     setScroll(scrollInstance);

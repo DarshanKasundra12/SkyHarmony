@@ -265,6 +265,8 @@ const AppContent = () => {
         </div>
       </footer>
 
+      <Analytics />
+
       <style>{`
         /* --- BRAND NEW FOOTER VISUALS --- */
         .footer-ultra {

@@ -1,21 +1,36 @@
 <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- This SVG recreates the approved architectural 'SH' concepts with native transparency -->
-  <!-- Main Pillars (The 'H' and Towers) -->
-  <rect x="160" y="140" width="24" height="260" rx="4" fill="#D4AF37"/>
-  <rect x="328" y="140" width="24" height="260" rx="4" fill="#D4AF37"/>
+  <!-- Architectural 'S' and 'H' Fusion Logo -->
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D4AF37" />
+      <stop offset="50%" stop-color="#F9E076" />
+      <stop offset="100%" stop-color="#B8860B" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <stop offset="0%" stop-color="#D4AF37" />
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Left Pillar (Part of H) -->
+  <rect x="140" y="100" width="30" height="312" rx="4" fill="url(#goldGradient)" />
   
-  <!-- Connecting Horizontal Bar -->
-  <rect x="160" y="260" width="192" height="12" rx="2" fill="#D4AF37"/>
+  <!-- Right Pillar (Part of H) -->
+  <rect x="342" y="100" width="30" height="312" rx="4" fill="url(#goldGradient)" />
   
-  <!-- Architectural Sky Arch -->
-  <path d="M160 140C160 140 200 100 256 100C312 100 352 140 352 140" stroke="#D4AF37" stroke-width="20" stroke-linecap="round"/>
+  <!-- Center Bridge (Creating H) -->
+  <rect x="140" y="240" width="232" height="15" rx="2" fill="url(#goldGradient)" />
   
-  <!-- Modern Geometric Accent (The 'S' Curve) -->
-  <path d="M180 340C220 380 292 380 332 340" stroke="#D4AF37" stroke-width="8" stroke-linecap="round" opacity="0.6"/>
+  <!-- The Architectural 'S' Curve weaving through H -->
+  <path d="M140 160C140 160 256 120 372 160C372 160 372 352 372 352C372 352 256 392 140 352" stroke="url(#goldGradient)" stroke-width="20" stroke-linecap="round" fill="none" opacity="0.9" />
   
-  <!-- Vertical Detail Lines (Modern Aesthetic) -->
-  <line x1="256" y1="100" x2="256" y2="420" stroke="#D4AF37" stroke-width="2" stroke-dasharray="8 8" opacity="0.4"/>
+  <!-- Top Roofline / Arch -->
+  <path d="M120 100L256 40L392 100" stroke="url(#goldGradient)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
   
-  <!-- Base Foundation -->
-  <rect x="130" y="400" width="252" height="8" rx="4" fill="#D4AF37"/>
+  <!-- Foundation Base -->
+  <rect x="100" y="412" width="312" height="10" rx="5" fill="url(#goldGradient)" />
+  
+  <!-- Decorative Technical Accents (Graph lines) -->
+  <line x1="256" y1="40" x2="256" y2="440" stroke="url(#goldGradient)" stroke-width="1" stroke-dasharray="4 4" opacity="0.4" />
 </svg>

@@ -78,6 +78,7 @@ const Home = () => {
 
   return (
     <div className="home-wrapper" ref={containerRef}>
+      <div className="blueprint-bg" />
       <Helmet>
         <title>Sky Harmony | Luxury Real Estate & Premium Living in Ahmedabad</title>
         <meta name="description" content="Discover the pinnacle of luxury living with Sky Harmony. Explore premium 2 & 3 BHK residences, new projects in Vastral, and gated communities in Ahmedabad." />
@@ -297,10 +298,29 @@ const Home = () => {
 
       <style>{`
         .home-wrapper {
+          position: relative;
           width: 100%;
           background: #0b0b0e;
           color: #fff;
           overflow-x: hidden;
+        }
+
+        .blueprint-bg {
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          opacity: 0.04;
+          background-size: 60px 60px;
+          background-image:
+            linear-gradient(to right, var(--primary-gold) 1px, transparent 1px),
+            linear-gradient(to bottom, var(--primary-gold) 1px, transparent 1px);
+          animation: panDraft 30s linear infinite;
+          pointer-events: none;
+        }
+
+        @keyframes panDraft {
+            from { background-position: 0 0; }
+            to { background-position: -60px -60px; }
         }
 
         .container {

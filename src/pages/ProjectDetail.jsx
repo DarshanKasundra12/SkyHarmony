@@ -132,6 +132,7 @@ const ProjectDetail = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
+      <div className="blueprint-bg" />
       <Helmet>
         <title>Ready to Move Apartments Ahmedabad | Sky Harmony</title>
         <meta
@@ -619,7 +620,27 @@ const ProjectDetail = () => {
                 .pd-page-wrapper {
                     background-color: #0b0b0e !important;
                     min-height: 100vh;
+                    width: 100%;
                     overflow-x: hidden;
+                    position: relative;
+                }
+
+                .blueprint-bg {
+                    position: absolute;
+                    inset: 0;
+                    z-index: 0;
+                    opacity: 0.04;
+                    background-size: 60px 60px;
+                    background-image:
+                      linear-gradient(to right, var(--primary-gold) 1px, transparent 1px),
+                      linear-gradient(to bottom, var(--primary-gold) 1px, transparent 1px);
+                    animation: panDraft 30s linear infinite;
+                    pointer-events: none;
+                }
+
+                @keyframes panDraft {
+                    from { background-position: 0 0; }
+                    to { background-position: -60px -60px; }
                 }
 
                 .pd-hero-container {

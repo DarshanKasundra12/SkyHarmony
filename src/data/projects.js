@@ -41,12 +41,22 @@ export const projectsData = [
         type: "2 BHK", 
         image: "/assets/2BHKFloor.png", 
         area: "Approx. 620 - 650 sq.ft (Carpet)", 
+        carpetArea: "650 sq. ft.",
+        balconySize: "120 sq. ft.",
+        totalArea: "770 sq. ft.",
+        bedrooms: "2",
+        bathrooms: "2",
         desc: "Spacious and ventilated 2 BHK layout designed for comfort." 
       },
       { 
         type: "3 BHK", 
         image: "/assets/3BHKFloor.png", 
         area: "Approx. 820 - 859 sq.ft (Carpet)", 
+        carpetArea: "859 sq. ft.",
+        balconySize: "180 sq. ft.",
+        totalArea: "1039 sq. ft.",
+        bedrooms: "3",
+        bathrooms: "3",
         desc: "Premium 3 BHK configuration with expansive living areas." 
       }
     ],

@@ -53,7 +53,11 @@ const Navbar = () => {
                 className="hamburger-btn" 
                 onClick={() => setMenuOpen(!menuOpen)}
              >
-                {menuOpen ? 'CLOSE' : 'MENU'}
+                {menuOpen ? (
+                  <span className="ham-text">CL<br/>OS<br/>E</span>
+                ) : (
+                  <span className="ham-text">ME<br/>NU</span>
+                )}
              </button>
           </div>
         </div>

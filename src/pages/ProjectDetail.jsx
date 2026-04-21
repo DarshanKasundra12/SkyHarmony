@@ -47,7 +47,8 @@ const ProjectDetail = () => {
   };
 
   useEffect(() => {
-    setIsMobileDevice(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    setIsMobileDevice(isMobile);
     window.scrollTo(0, 0);
   }, []);
 
@@ -132,15 +133,17 @@ const ProjectDetail = () => {
       exit={{ opacity: 0 }}
     >
       <Helmet>
-        <title>{`${project.title} - Premium ${project.type} in ${project.location}`}</title>
+        <title>Ready to Move Apartments Ahmedabad | Sky Harmony</title>
         <meta
           name="description"
-          content={`Discover ${project.title} by ${project.developer}. ${project.subtitle} in ${project.location}. Featuring ${project.type} configurations starting from ${project.priceRange}. Ready to move options available.`}
+          content="Explore Balaji Sky Harmony: The top choice for new projects in Vastral. Gated community apartments near Metro & SP Ring Road. Luxury residential projects Ahmedabad."
         />
         <meta
           name="keywords"
-          content={`${project.title}, ${project.location}, ${project.developer}, ${project.type} flats Ahmedabad, Ready to move vastral`}
+          content="ready to move apartments Ahmedabad, new projects Vastral, gated community Vastral, apartments near Metro Ahmedabad, apartments near SP Ring Road, residential projects Ahmedabad, luxury apartments Vastral, Balaji Sky Harmony floor plan, 3 BHK luxury flats Ahmedabad, premium housing in Vastral, residential investment Ahmedabad, top builders in Ahmedabad East, gated society in Vastral"
         />
+        <link rel="canonical" href={`https://skyharmony.vercel.app/project/${id}`} />
+        <meta name="author" content="Balaji Construction" />
       </Helmet>
 
       {/* HERO SECTION - CINEMATIC ENTRANCE */}
@@ -166,6 +169,8 @@ const ProjectDetail = () => {
           </motion.div>
         </div>
       </div>
+
+
 
       <section className="pd-main-grid-section">
         <div className="container pd-master-grid">
@@ -197,28 +202,6 @@ const ProjectDetail = () => {
                     </span>
                     <p className="pd-spec-val">{val}</p>
                   </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="pd-amenities-card-container pd-reveal-line">
-              <h3 className="pd-section-header">LIFESTYLE & AMENITIES</h3>
-              <div className="pd-amenity-grid">
-                {project.amenities.map((amenity, idx) => (
-                  <motion.div
-                    key={idx}
-                    className="pd-amenity-item"
-                    whileHover={{ y: -10 }}
-                    style={{
-                      backgroundImage: `linear-gradient(rgba(11,11,14,0.7), rgba(11,11,14,0.95)), url(${amenity.image})`,
-                    }}
-                  >
-                    <div className="pd-amenity-icon-box">{amenity.icon}</div>
-                    <div className="pd-amenity-meta">
-                      <span className="pd-amenity-label">{amenity.name}</span>
-                      <p className="pd-amenity-desc">{amenity.desc}</p>
-                    </div>
-                  </motion.div>
                 ))}
               </div>
             </div>
@@ -267,52 +250,155 @@ const ProjectDetail = () => {
 
             <div className="pd-sidebar-card pd-sidebar-stagger">
               <div className="pd-card-beam" />
-              <div className="pd-fp-header">
-                <h4 className="pd-sidebar-title">FLOOR PLANS</h4>
-                <div className="pd-fp-tabs">
-                  {project.floorPlans.map((p, i) => (
-                    <button
-                      key={i}
-                      className={`pd-fp-tab ${activeFloorPlan === i ? "active" : ""}`}
-                      onClick={() => setActiveFloorPlan(i)}
-                    >
-                      {p.type}
-                    </button>
-                  ))}
+              <h4 className="pd-sidebar-title">VISIT THE PROPERTY</h4>
+              <div className="pd-tour-preview">
+                <div className="pd-tour-overlay">
+                  <button className="pd-tour-btn" onClick={openWhatsApp}>
+                    BOOK A HOUSE VISIT
+                  </button>
                 </div>
+                <img
+                  src={project.mainImage}
+                  alt="House Visit Preview"
+                  className="pd-tour-img"
+                />
               </div>
-              <div className="pd-fp-viewport">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeFloorPlan}
-                    className="pd-fp-viewport"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 1.05 }}
-                    transition={{ duration: 0.4 }}
-                    onClick={openFloorPlan}
-                  >
-                    <img
-                      src={project.floorPlans[activeFloorPlan].image}
-                      alt={`${project.title} ${project.floorPlans[activeFloorPlan].type} Floor Plan layout in ${project.location}`}
-                      className="pd-fp-img"
-                      draggable="false"
-                      onContextMenu={(e) => e.preventDefault()}
-                    />
-                    <div className="pd-fp-zoom-hint">CLICK TO ENLARGE</div>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-              <div className="pd-fp-footer">
-                <span className="pd-fp-area-label">ESTIMATED AREA</span>
-                <span className="pd-fp-area-val">
-                  {project.floorPlans[activeFloorPlan].area}
-                </span>
-              </div>
+              <p className="pd-sidebar-hint">
+                Witness the harmony of luxury in person
+              </p>
             </div>
           </aside>
         </div>
       </section>
+
+      {/* NEW PREMIUM FLOOR PLAN SECTION */}
+      <section className="pd-floorplan-section pd-reveal-line">
+        <div className="container">
+          <div className="pd-fp-intro">
+            <h3 className="pd-section-header text-center">
+              RESIDENCES & LAYOUTS
+            </h3>
+            <p className="pd-fp-subtitle text-center">
+              Meticulously crafted spaces designed for modern living
+            </p>
+          </div>
+
+          <div className="pd-fp-controls-container">
+            {/* BHK SELECTOR TOGGLE */}
+            <div className="pd-bhk-toggle-wrapper">
+              <span
+                className={`pd-bhk-label ${activeFloorPlan === 0 ? "active" : ""}`}
+              >
+                2 BHK
+              </span>
+              <div
+                className="pd-bhk-toggle-track"
+                onClick={() =>
+                  setActiveFloorPlan(activeFloorPlan === 0 ? 1 : 0)
+                }
+              >
+                <motion.div
+                  className="pd-bhk-toggle-thumb"
+                  animate={{ x: activeFloorPlan === 0 ? 0 : 38 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                />
+              </div>
+              <span
+                className={`pd-bhk-label ${activeFloorPlan === 1 ? "active" : ""}`}
+              >
+                3 BHK
+              </span>
+            </div>
+          </div>
+
+          <div className="pd-fp-main-display">
+            <div className="pd-fp-image-container" onClick={openFloorPlan}>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeFloorPlan}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  transition={{ duration: 0.5 }}
+                  className="pd-fp-image-wrapper"
+                >
+                  <img
+                    src={project.floorPlans[activeFloorPlan].image}
+                    alt={`${project.title} ${project.floorPlans[activeFloorPlan].type}`}
+                    className="pd-fp-main-img"
+                  />
+                  <div className="pd-fp-hint-overlay">
+                    <span>CLICK TO ENLARGE</span>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            <div className="pd-fp-info-container">
+              <h4 className="pd-fp-spec-title">SPECIFICATIONS</h4>
+              <div className="pd-fp-spec-table">
+                <div className="pd-fp-spec-row">
+                  <div className="pd-fp-spec-item-box">
+                    <span className="pd-fp-spec-icon">📐</span>
+                    <span className="pd-fp-spec-label">CARPET AREA</span>
+                  </div>
+                  <span className="pd-fp-spec-value">
+                    {project.floorPlans[activeFloorPlan].carpetArea}
+                  </span>
+                </div>
+                <div className="pd-fp-spec-row">
+                  <div className="pd-fp-spec-item-box">
+                    <span className="pd-fp-spec-icon">🌅</span>
+                    <span className="pd-fp-spec-label">BALCONY SIZE</span>
+                  </div>
+                  <span className="pd-fp-spec-value">
+                    {project.floorPlans[activeFloorPlan].balconySize}
+                  </span>
+                </div>
+                <div className="pd-fp-spec-row">
+                  <div className="pd-fp-spec-item-box">
+                    <span className="pd-fp-spec-icon">📏</span>
+                    <span className="pd-fp-spec-label">TOTAL AREA</span>
+                  </div>
+                  <span className="pd-fp-spec-value">
+                    {project.floorPlans[activeFloorPlan].totalArea}
+                  </span>
+                </div>
+                <div className="pd-fp-spec-row">
+                  <div className="pd-fp-spec-item-box">
+                    <span className="pd-fp-spec-icon">🛏️</span>
+                    <span className="pd-fp-spec-label">BEDROOMS</span>
+                  </div>
+                  <span className="pd-fp-spec-value">
+                    {project.floorPlans[activeFloorPlan].bedrooms}
+                  </span>
+                </div>
+                <div className="pd-fp-spec-row">
+                  <div className="pd-fp-spec-item-box">
+                    <span className="pd-fp-spec-icon">🚿</span>
+                    <span className="pd-fp-spec-label">BATHROOMS</span>
+                  </div>
+                  <span className="pd-fp-spec-value">
+                    {project.floorPlans[activeFloorPlan].bathrooms}
+                  </span>
+                </div>
+              </div>
+
+              <div className="pd-fp-cta-box">
+                <p className="pd-fp-cta-text">Interested in this layout?</p>
+                <button
+                  className="button button-solid pd-fp-cta-btn"
+                  onClick={openWhatsApp}
+                >
+                  ENQUIRE FOR THIS PLAN
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
 
       {/* FLOOR PLAN LIGHTBOX */}
       <AnimatePresence>
@@ -418,32 +504,117 @@ const ProjectDetail = () => {
         )}
       </AnimatePresence>
 
-      {/* SITE GALLERY PORTFOLIO */}
-      <section className="pd-gallery-section">
-        <div className="container">
-          <h3 className="pd-gallery-title">ARCHITECTURAL PORTFOLIO</h3>
-          <div className="pd-gallery-masonry">
-            {project.gallery.map((img, i) => (
+      {/* FULL WIDTH LIFESTYLE & AMENITIES */}
+      <section className="pd-fullwidth-section pd-reveal-line">
+        <div className="container-fluid pd-px-side">
+          <h3 className="pd-section-header text-center">
+            LIFESTYLE & AMENITIES
+          </h3>
+          <div className="pd-amenity-grid">
+            {project.amenities.map((amenity, idx) => (
               <motion.div
-                key={i}
-                className="pd-gallery-image-wrapper"
-                whileHover={{ scale: 1.05 }}
+                key={idx}
+                className="pd-amenity-card-alt"
+                whileHover={{ scale: 1.02 }}
+                style={{
+                  backgroundImage: `url(${amenity.image})`,
+                }}
               >
-                <img
-                  src={img}
-                  alt={`Architectural render of ${project.title} - View ${i + 1} of portfolio gallery`}
-                  className="pd-gallery-img"
-                  draggable="false"
-                  onContextMenu={(e) => e.preventDefault()}
-                />
+                <div className="pd-amenity-overlay-alt" />
+                <div className="pd-amenity-icon-tag">{amenity.icon}</div>
+                <div className="pd-amenity-content-alt">
+                  <span className="pd-amenity-title-alt">{amenity.name}</span>
+                  <p className="pd-amenity-text-alt">{amenity.desc}</p>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* FULL WIDTH SITE GALLERY PORTFOLIO */}
+      <section className="pd-fullwidth-section pd-gallery-section">
+        <div className="container-fluid pd-px-side">
+          <h3 className="pd-gallery-title">ARCHITECTURAL PORTFOLIO</h3>
+          <div className="pd-gallery-asymmetric-grid">
+            <div className="pd-gallery-main-item">
+              <motion.img
+                src={project.gallery[0]}
+                alt="Main Portfolio"
+                whileHover={{ scale: 1.02 }}
+                className="pd-gallery-img-large"
+              />
+            </div>
+            <div className="pd-gallery-sub-grid">
+              {project.gallery.slice(1, 5).map((img, i) => (
+                <motion.div
+                  key={i}
+                  className="pd-gallery-sub-item"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <img
+                    src={img}
+                    alt={`Gallery ${i}`}
+                    className="pd-gallery-img-small"
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* LOCATION & CONNECTIVITY SECTION (MOVED) */}
+      <section className="pd-map-section pd-reveal-line">
+        <div className="container">
+          <div className="pd-map-grid">
+            <div className="pd-map-info">
+              <span className="pd-section-label">LOCATION & CONNECTIVITY</span>
+              <h2 className="pd-section-header">Ready to Move Apartments in Ahmedabad</h2>
+              <p className="pd-map-desc">
+                Balaji Sky Harmony stands as one of the premier <strong>new projects in Vastral</strong>. 
+                Experience the security of a <strong>gated community in Vastral</strong> with unparalleled access 
+                to East Ahmedabad's key hubs. Our property is strategically located 
+                <strong> near Metro Ahmedabad</strong> and the <strong>SP Ring Road</strong>, making it the 
+                pinnacle of modern <strong>residential projects in Ahmedabad</strong>.
+              </p>
+              <div className="pd-connectivity-list">
+                <div className="pd-conn-item">
+                  <span className="pd-conn-icon">🚇</span>
+                  <div>
+                    <strong>Near Metro Station</strong>
+                    <p>Just 5 minutes from Vastral Metro Station</p>
+                  </div>
+                </div>
+                <div className="pd-conn-item">
+                  <span className="pd-conn-icon">🛣️</span>
+                  <div>
+                    <strong>SP Ring Road Access</strong>
+                    <p>Immediate connectivity to the ring road</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="pd-map-frame-container">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.483184654316!2d72.6716697!3d23.0067052!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e87040d1fd361%3A0x823da28726465463!2sSky%20Harmony!5e0!3m2!1sen!2sin!4v1713690000000!5m2!1sen!2sin" 
+                width="100%" 
+                height="450" 
+                style={{ border: 0, borderRadius: '20px' }} 
+                allowFullScreen="" 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Location Map"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
       <style>{`
                 .pd-mobile-fp-close { display: none; }
+                .text-center { text-align: center; }
 
                 .pd-page-wrapper {
                     background-color: #0b0b0e !important;
@@ -513,7 +684,7 @@ const ProjectDetail = () => {
 
                 /* GRID SYSTEM */
                 .pd-main-grid-section {
-                    padding: 6rem 0;
+                    padding: 6rem 0 2rem 0;
                     position: relative;
                     z-index: 15;
                 }
@@ -627,68 +798,71 @@ const ProjectDetail = () => {
                     line-height: 1.5;
                 }
 
-                /* AMENITIES */
                 .pd-amenity-grid {
                     display: grid;
-                    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                    grid-template-columns: repeat(2, 1fr);
                     gap: 1.5rem;
                 }
 
-                .pd-amenity-item {
+                .pd-amenity-card-alt {
+                    position: relative;
                     aspect-ratio: 16/10;
-                    border-radius: 16px;
-                    padding: 2rem;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: flex-end;
+                    border-radius: 12px;
+                    overflow: hidden;
                     background-size: cover;
                     background-position: center;
-                    position: relative;
-                    overflow: hidden;
-                    border: 1px solid rgba(255,255,255,0.05);
                     cursor: pointer;
-                    transition: border 0.3s;
+                    border: 1px solid rgba(255,255,255,0.05);
                 }
 
-                .pd-amenity-item::after {
-                    content: '';
+                .pd-amenity-overlay-alt {
                     position: absolute;
                     inset: 0;
-                    background: linear-gradient(to top, rgba(0,0,0,0.9) 10%, transparent 70%);
+                    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
                     z-index: 1;
                 }
 
-                .pd-amenity-icon-box {
+                .pd-amenity-icon-tag {
                     position: absolute;
                     top: 1.5rem;
                     right: 1.5rem;
-                    width: 45px;
-                    height: 45px;
-                    background: rgba(212,175,55,0.15);
-                    color: var(--primary-gold);
+                    width: 36px;
+                    height: 36px;
+                    background: rgba(212,175,55,0.2);
+                    border: 1px solid var(--primary-gold);
+                    border-radius: 50%;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    border-radius: 50%;
-                    font-size: 1.3rem;
-                    border: 1px solid rgba(212,175,55,0.3);
-                    z-index: 10;
+                    z-index: 5;
+                    font-size: 1rem;
+                    backdrop-filter: blur(4px);
                 }
 
-                .pd-amenity-meta { position: relative; z-index: 10; }
+                .pd-amenity-content-alt {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    padding: 2rem;
+                    z-index: 5;
+                }
 
-                .pd-amenity-label {
+                .pd-amenity-title-alt {
                     display: block;
                     font-size: 1.1rem;
                     font-weight: 800;
-                    color: #fff !important;
+                    color: var(--primary-gold);
                     margin-bottom: 0.5rem;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1rem;
                 }
 
-                .pd-amenity-desc {
-                    font-size: 0.8rem;
-                    color: rgba(255,255,255,0.5) !important;
+                .pd-amenity-text-alt {
+                    font-size: 0.85rem;
+                    color: rgba(255,255,255,0.6);
                     line-height: 1.4;
+                    font-weight: 300;
                 }
 
                 /* SIDEBAR CARDS */
@@ -706,6 +880,14 @@ const ProjectDetail = () => {
                     color: #fff !important;
                     font-weight: 800;
                     margin-bottom: 2rem;
+                }
+
+                .pd-sidebar-hint {
+                    font-size: 0.7rem;
+                    color: rgba(255,255,255,0.3);
+                    text-align: center;
+                    margin-top: 1rem;
+                    letter-spacing: 0.05rem;
                 }
 
                 .pd-sum-row {
@@ -748,174 +930,646 @@ const ProjectDetail = () => {
                     justify-content: center;
                 }
 
-                /* FLOOR PLAN SECTION */
-                .pd-fp-header {
+                .pd-tour-preview {
+                    position: relative;
+                    border-radius: 12px;
+                    overflow: hidden;
+                    aspect-ratio: 16/9;
+                }
+
+                .pd-tour-img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    filter: blur(2px) brightness(0.6);
+                }
+
+                .pd-tour-overlay {
+                    position: absolute;
+                    inset: 0;
                     display: flex;
-                    justify-content: space-between;
                     align-items: center;
-                    margin-bottom: 2rem;
+                    justify-content: center;
+                    z-index: 2;
                 }
 
-                .pd-fp-tabs {
-                    display: flex;
-                    background: #0b0b0e;
-                    padding: 4px;
-                    border-radius: 8px;
-                    border: 1px solid rgba(255,255,255,0.05);
-                }
-
-                .pd-fp-tab {
-                    padding: 0.5rem 1rem;
+                .pd-tour-btn {
+                    padding: 0.8rem 1.5rem;
                     background: transparent;
-                    border: none;
-                    color: rgba(255,255,255,0.4);
+                    border: 1px solid var(--primary-gold);
+                    color: var(--primary-gold);
                     font-size: 0.7rem;
                     font-weight: 800;
+                    letter-spacing: 0.1rem;
+                    border-radius: 4px;
                     cursor: pointer;
-                    border-radius: 6px;
                     transition: all 0.3s;
                 }
 
-                .pd-fp-tab.active {
+                .pd-tour-btn:hover {
                     background: var(--primary-gold);
                     color: #000;
                 }
 
-                .pd-fp-viewport {
-                    background: #fff;
-                    border-radius: 12px;
-                    // padding: 2.5rem;
-                    // height: 280px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    overflow: hidden;
-                    position: relative;
-                    cursor: zoom-in;
-                }
-
-                .pd-fp-zoom-hint {
-                    position: absolute;
-                    bottom: 1rem;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    background: rgba(0,0,0,0.8);
-                    color: var(--primary-gold);
-                    font-size: 0.6rem;
-                    font-weight: 900;
-                    padding: 0.4rem 0.8rem;
-                    border-radius: 4px;
-                    letter-spacing: 0.1rem;
-                    opacity: 0;
-                    transition: opacity 0.3s;
-                    pointer-events: none;
-                }
-
-                .pd-fp-viewport:hover .pd-fp-zoom-hint {
-                    opacity: 1;
-                }
-
-                .pd-fp-img {
-                    max-width: 100%;
-                    max-height: 100%;
-                    object-fit: contain;
-                }
-
-                /* LIGHTBOX CSS */
-                .pd-fp-lightbox-overlay {
-                    position: fixed;
-                    inset: 0;
-                    background: rgba(0,0,0,0.95);
-                    z-index: 6000;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    padding: 2rem;
-                    backdrop-filter: blur(10px);
-                }
-
-                .pd-fp-lightbox-content {
-                    width: min(1300px, 100%);
-                    height: 90vh;
+                /* PREMIUM FLOOR PLAN SECTION */
+                .pd-floorplan-section {
+                    padding: 8rem 0;
                     background: #0b0b0e;
-                    border: 1px solid rgba(255,255,255,0.1);
-                    border-radius: 20px;
-                    display: flex;
-                    flex-direction: column;
-                    overflow: hidden;
-                    box-shadow: 0 50px 100px rgba(0,0,0,0.5);
                 }
 
-                .pd-fp-lightbox-toolbar {
-                    padding: 1.5rem 2.5rem;
-                    background: #131316;
+                .pd-fp-intro {
+                    margin-bottom: 4rem;
+                }
+
+                .pd-fp-subtitle {
+                    color: rgba(255,255,255,0.4);
+                    font-size: 1.1rem;
+                    font-weight: 300;
+                    margin-top: -1.5rem;
+                }
+
+                .pd-fp-controls-container {
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                    border-bottom: 1px solid rgba(255,255,255,0.05);
+                    margin-bottom: 3rem;
+                    flex-wrap: wrap;
+                    gap: 2rem;
+                    padding: 2rem;
+                    background: #131316;
+                    border: 1px solid rgba(255,255,255,0.05);
+                    border-radius: 20px;
                 }
 
-                .pd-fp-lightbox-title {
-                    display: block;
-                    font-size: 0.75rem;
-                    letter-spacing: 0.15rem;
-                    color: var(--primary-gold);
-                    font-weight: 800;
-                    margin-bottom: 0.3rem;
-                }
-
-                .pd-fp-lightbox-area {
-                    font-size: 1.1rem;
-                    font-weight: 700;
-                    color: #fff;
-                }
-
-                .pd-fp-lightbox-actions {
+                .pd-bhk-toggle-wrapper {
                     display: flex;
                     align-items: center;
-                    gap: 1rem;
+                    gap: 1.5rem;
                 }
 
-                .pd-fp-action-btn {
-                    background: rgba(255,255,255,0.05);
-                    border: 1px solid rgba(255,255,255,0.1);
-                    color: #fff;
-                    padding: 0.6rem 1rem;
-                    border-radius: 8px;
-                    font-size: 0.75rem;
-                    font-weight: 700;
+                .pd-bhk-label {
+                    font-size: 1rem;
+                    font-weight: 800;
+                    color: rgba(255,255,255,0.2);
+                    transition: color 0.3s;
+                }
+
+                .pd-bhk-label.active {
+                    color: var(--primary-gold);
+                }
+
+                .pd-bhk-toggle-track {
+                    width: 76px;
+                    height: 36px;
+                    background: #0b0b0e;
+                    border: 1px solid var(--primary-gold);
+                    border-radius: 100px;
+                    padding: 4px;
                     cursor: pointer;
-                    transition: all 0.2s;
+                    display: flex;
                 }
 
-                .pd-fp-action-btn:hover {
+                .pd-bhk-toggle-thumb {
+                    width: 26px;
+                    height: 26px;
+                    background: var(--primary-gold);
+                    border-radius: 50%;
+                }
+
+                .pd-floor-selector {
+                    display: flex;
+                    align-items: center;
+                    gap: 1.5rem;
+                }
+
+                .pd-floor-label {
+                    font-size: 0.8rem;
+                    letter-spacing: 0.1rem;
+                    color: rgba(255,255,255,0.4);
+                    font-weight: 700;
+                }
+
+                .pd-floor-chips {
+                    display: flex;
+                    gap: 0.8rem;
+                }
+
+                .pd-floor-chip {
+                    width: 40px;
+                    height: 40px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: #0b0b0e;
+                    border: 1px solid rgba(255,255,255,0.1);
+                    color: rgba(255,255,255,0.6);
+                    font-weight: 700;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                }
+
+                .pd-floor-chip.active, .pd-floor-chip:hover {
                     background: var(--primary-gold);
                     color: #000;
                     border-color: var(--primary-gold);
                 }
 
-                .pd-fp-zoom-val {
-                    min-width: 60px;
-                    text-align: center;
+                .pd-fp-main-display {
+                    display: grid;
+                    grid-template-columns: 1.2fr 0.8fr;
+                    gap: 4rem;
+                    align-items: center;
+                }
+
+                .pd-fp-image-container {
+                    background: #fff;
+                    border-radius: 24px;
+                    padding: 4rem;
+                    position: relative;
+                    cursor: zoom-in;
+                    overflow: hidden;
+                    box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+                }
+
+                .pd-fp-image-wrapper {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .pd-fp-main-img {
+                    max-width: 100%;
+                    max-height: 500px;
+                    object-fit: contain;
+                }
+
+                .pd-fp-hint-overlay {
+                    position: absolute;
+                    inset: 0;
+                    background: rgba(0,0,0,0.05);
+                    display: flex;
+                    align-items: flex-end;
+                    justify-content: center;
+                    padding-bottom: 2rem;
+                    opacity: 0;
+                    transition: opacity 0.3s;
+                }
+
+                .pd-fp-image-container:hover .pd-fp-hint-overlay {
+                    opacity: 1;
+                }
+
+                .pd-fp-hint-overlay span {
+                    padding: 0.8rem 1.5rem;
+                    background: #000;
+                    color: #fff;
+                    font-size: 0.7rem;
                     font-weight: 800;
+                    letter-spacing: 0.2rem;
+                    border-radius: 100px;
+                }
+
+                .pd-fp-info-container {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 2.5rem;
+                }
+
+                .pd-fp-spec-title {
+                    font-size: 1.5rem;
+                    color: #fff !important;
+                    font-weight: 900;
+                    letter-spacing: 0.2rem;
+                    position: relative;
+                    padding-bottom: 1rem;
+                }
+
+                .pd-fp-spec-title::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 60px;
+                    height: 4px;
+                    background: var(--primary-gold);
+                }
+
+                .pd-fp-spec-table {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+                }
+
+                .pd-fp-spec-row {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 1.2rem;
+                    background: rgba(255,255,255,0.03);
+                    border: 1px solid rgba(255,255,255,0.05);
+                    border-radius: 12px;
+                    transition: transform 0.3s;
+                }
+
+                /* FULL WIDTH COMPONENTS */
+                .pd-fullwidth-section {
+                    width: 100%;
+                    padding: 8rem 0;
+                    position: relative;
+                }
+
+                .pd-px-side {
+                    padding-left: 5% !important;
+                    padding-right: 5% !important;
+                }
+
+                .pd-amenity-grid {
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 1.5rem;
+                    margin-top: 3rem;
+                }
+
+                .pd-amenity-card-alt {
+                    position: relative;
+                    aspect-ratio: 16/10;
+                    border-radius: 12px;
+                    overflow: hidden;
+                    background-size: cover;
+                    background-position: center;
+                    cursor: pointer;
+                    border: 1px solid rgba(255,255,255,0.05);
+                }
+
+                .pd-amenity-overlay-alt {
+                    position: absolute;
+                    inset: 0;
+                    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+                    z-index: 1;
+                }
+
+                .pd-amenity-icon-tag {
+                    position: absolute;
+                    top: 1.5rem;
+                    right: 1.5rem;
+                    width: 36px;
+                    height: 36px;
+                    background: rgba(212,175,55,0.2);
+                    border: 1px solid var(--primary-gold);
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 5;
+                    font-size: 1rem;
+                    backdrop-filter: blur(4px);
+                }
+
+                .pd-amenity-content-alt {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    padding: 2rem;
+                    z-index: 5;
+                }
+
+                .pd-amenity-title-alt {
+                    display: block;
+                    font-size: 1.1rem;
+                    font-weight: 800;
+                    color: var(--primary-gold);
+                    margin-bottom: 0.5rem;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1rem;
+                }
+
+                .pd-amenity-text-alt {
+                    font-size: 0.85rem;
+                    color: rgba(255,255,255,0.6);
+                    line-height: 1.4;
+                    font-weight: 300;
+                }
+
+                /* SIDEBAR CARDS */
+                .pd-sidebar-card {
+                    background: #131316 !important;
+                    border: 1px solid rgba(255,255,255,0.06);
+                    border-radius: 18px;
+                    padding: 2.5rem;
+                    position: relative;
+                }
+
+                .pd-sidebar-title {
+                    font-size: 0.9rem;
+                    letter-spacing: 0.2rem;
+                    color: #fff !important;
+                    font-weight: 800;
+                    margin-bottom: 2rem;
+                }
+
+                .pd-sidebar-hint {
+                    font-size: 0.7rem;
+                    color: rgba(255,255,255,0.3);
+                    text-align: center;
+                    margin-top: 1rem;
+                    letter-spacing: 0.05rem;
+                }
+
+                .pd-sum-row {
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 1rem 0;
+                    border-bottom: 1px solid rgba(255,255,255,0.04);
+                }
+
+                .pd-sum-label {
+                    font-size: 0.7rem;
+                    color: var(--primary-gold) !important;
+                    text-transform: uppercase;
+                    font-weight: 700;
+                }
+
+                .pd-sum-val {
+                    font-size: 0.95rem;
+                    font-weight: 600;
+                }
+
+                .pd-action-stack {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+                    margin-top: 2.5rem;
+                }
+
+                .pd-btn-wa {
+                    background: #25D366 !important;
+                    border: none;
+                    width: 100%;
+                    color: #fff !important;
+                    letter-spacing: 0.1rem;
+                    justify-content: center;
+                }
+
+                .pd-btn-brochure {
+                    width: 100%;
+                    justify-content: center;
+                }
+
+                .pd-tour-preview {
+                    position: relative;
+                    border-radius: 12px;
+                    overflow: hidden;
+                    aspect-ratio: 16/9;
+                }
+
+                .pd-tour-img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    filter: blur(2px) brightness(0.6);
+                }
+
+                .pd-tour-overlay {
+                    position: absolute;
+                    inset: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 2;
+                }
+
+                .pd-tour-btn {
+                    padding: 0.8rem 1.5rem;
+                    background: transparent;
+                    border: 1px solid var(--primary-gold);
+                    color: var(--primary-gold);
+                    font-size: 0.7rem;
+                    font-weight: 800;
+                    letter-spacing: 0.1rem;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                }
+
+                .pd-tour-btn:hover {
+                    background: var(--primary-gold);
+                    color: #000;
+                }
+
+                /* PREMIUM FLOOR PLAN SECTION */
+                .pd-floorplan-section {
+                    padding: 8rem 0;
+                    background: #0b0b0e;
+                }
+
+                .pd-fp-intro {
+                    margin-bottom: 4rem;
+                }
+
+                .pd-fp-subtitle {
+                    color: rgba(255,255,255,0.4);
+                    font-size: 1.1rem;
+                    font-weight: 300;
+                    margin-top: -1.5rem;
+                }
+
+                .pd-fp-controls-container {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin: 1rem auto 3rem auto;
+                    width: fit-content;
+                    max-width: 90%;
+                    flex-wrap: wrap;
+                    gap: 2rem;
+                    padding: 1.5rem 4rem;
+                    background: #131316;
+                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    border-radius: 20px;
+                }
+
+                .pd-bhk-toggle-wrapper {
+                    display: flex;
+                    align-items: center;
+                    gap: 1.5rem;
+                }
+
+                .pd-bhk-label {
+                    font-size: 1rem;
+                    font-weight: 800;
+                    color: rgba(255,255,255,0.2);
+                    transition: color 0.3s;
+                }
+
+                .pd-bhk-label.active {
                     color: var(--primary-gold);
                 }
 
-                .pd-fp-close {
-                    background: rgba(255,0,0,0.1);
-                    border-color: rgba(255,0,0,0.2);
-                    color: #ff7777;
+                .pd-bhk-toggle-track {
+                    width: 76px;
+                    height: 36px;
+                    background: #0b0b0e;
+                    border: 1px solid var(--primary-gold);
+                    border-radius: 100px;
+                    padding: 4px;
+                    cursor: pointer;
+                    display: flex;
                 }
 
-                .pd-fp-close:hover {
-                    background: #ff4444;
-                    color: #fff;
-                    border-color: #ff4444;
+                .pd-bhk-toggle-thumb {
+                    width: 26px;
+                    height: 26px;
+                    background: var(--primary-gold);
+                    border-radius: 50%;
+                }
+
+                .pd-fp-main-display {
+                    display: grid;
+                    grid-template-columns: 1.2fr 0.8fr;
+                    gap: 4rem;
+                    align-items: center;
+                }
+
+                .pd-fp-image-container {
+                    background: #fff;
+                    border-radius: 24px;
+                    padding: 4rem;
+                    position: relative;
+                    cursor: zoom-in;
+                    overflow: hidden;
+                    box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+                }
+
+                .pd-fp-image-wrapper {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .pd-fp-main-img {
+                    max-width: 100%;
+                    max-height: 500px;
+                    object-fit: contain;
+                }
+
+                .pd-fp-hint-overlay {
+                    position: absolute;
+                    inset: 0;
+                    background: rgba(0,0,0,0.05);
+                    display: flex;
+                    align-items: flex-end;
+                    justify-content: center;
+                    padding-bottom: 2rem;
+                    opacity: 0;
+                    transition: opacity 0.3s;
+                }
+
+                /* REMOVED DUPLICATE BLOCKS */
+
+
+                .pd-fp-spec-item-box {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                }
+
+                .pd-fp-spec-icon {
+                    font-size: 1.2rem;
+                    opacity: 0.8;
+                }
+
+                .pd-fp-spec-label {
+                    font-size: 0.75rem;
+                    font-weight: 800;
+                    color: rgba(255,255,255,0.4);
+                    letter-spacing: 0.1rem;
+                }
+
+                .pd-fp-spec-value {
+                    font-size: 1.1rem;
+                    font-weight: 700;
+                    color: var(--primary-gold);
+                }
+
+                .pd-fp-cta-box {
+                    margin-top: 1rem;
+                    padding: 2.5rem;
+                    background: linear-gradient(135deg, rgba(212,175,55,0.1) 0%, transparent 100%);
+                    border-radius: 20px;
+                    border: 1px solid rgba(212,175,55,0.2);
+                    text-align: center;
+                }
+
+                .pd-fp-cta-text {
+                    font-size: 1.1rem;
+                    font-weight: 400;
+                    color: rgba(255,255,255,0.6);
+                    margin-bottom: 1.5rem;
+                }
+
+                .pd-fp-cta-btn {
+                    width: 100%;
+                    justify-content: center;
+                }
+
+                /* LIGHTBOX */
+                .pd-fp-lightbox-overlay {
+                    position: fixed;
+                    inset: 0;
+                    background: rgba(0,0,0,0.95);
+                    z-index: 9999;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    backdrop-filter: blur(10px);
+                }
+
+                .pd-fp-lightbox-content {
+                    width: 95vw;
+                    height: 90vh;
+                    background: #fff;
+                    border-radius: 24px;
+                    overflow: hidden;
+                    display: flex;
+                    flex-direction: column;
+                    position: relative;
+                }
+
+                .pd-fp-lightbox-toolbar {
+                    padding: 1.5rem 2.5rem;
+                    background: #0b0b0e;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    border-bottom: 1px solid rgba(255,255,255,0.1);
+                    z-index: 10;
+                }
+
+                .pd-fp-lightbox-meta {
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                .pd-fp-lightbox-title {
+                    font-size: 1.2rem;
+                    font-weight: 900;
+                    color: var(--primary-gold);
+                    letter-spacing: 0.2rem;
+                }
+
+                .pd-fp-lightbox-area {
+                    font-size: 0.8rem;
+                    color: rgba(255,255,255,0.5);
                 }
 
                 .pd-fp-lightbox-viewport {
                     flex: 1;
-                    position: relative;
                     overflow: hidden;
                     display: flex;
                     align-items: center;
@@ -924,184 +1578,194 @@ const ProjectDetail = () => {
                 }
 
                 .pd-fp-zoom-container {
-                    position: relative;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    touch-action: pinch-zoom;
-
                 }
 
                 .pd-fp-zoom-img {
-                    max-width: 95%;
-                    max-height: 95%;
+                    max-width: 90%;
+                    max-height: 90%;
                     object-fit: contain;
                 }
 
-                .pd-fp-footer {
-                    margin-top: 2rem;
+                .pd-fp-lightbox-actions {
                     display: flex;
-                    justify-content: space-between;
                     align-items: center;
-                    font-size: 0.85rem;
-                }
-
-                .pd-fp-area-label { color: rgba(255,255,255,0.4); }
-                .pd-fp-area-val { color: var(--primary-gold); font-weight: 800; border-bottom: 1px dashed var(--primary-gold); }
-
-                /* GALLERY MASONRY */
-                .pd-gallery-section { padding: 8rem 0; border-top: 1px solid rgba(255,255,255,0.05); }
-                .pd-gallery-title { text-align: center; font-size: 2rem; letter-spacing: 0.4rem; font-weight: 950; margin-bottom: 4rem; }
-                .pd-gallery-masonry {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
                     gap: 1.5rem;
                 }
 
-                .pd-gallery-image-wrapper {
-                    border-radius: 16px;
-                    overflow: hidden;
-                    aspect-ratio: 16/10;
-                    border: 1px solid rgba(255,255,255,0.05);
-                }
-
-                .pd-gallery-img { width: 100%; height: 100%; object-fit: cover; }
-
-                /* MODAL */
-                .pd-brochure-modal-overlay {
-                    position: fixed;
-                    inset: 0;
-                    background: rgba(0,0,0,0.85);
-                    backdrop-filter: blur(8px);
-                    z-index: 5000;
+                .pd-fp-action-btn {
+                    background: rgba(255,255,255,0.05);
+                    border: 1px solid rgba(255,255,255,0.1);
+                    color: #fff;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 8px;
+                    cursor: pointer;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    padding: 2rem;
+                    font-size: 1.2rem;
+                    transition: all 0.3s;
                 }
 
-                .pd-modal-content {
-                    width: min(1200px, 100%);
-                    height: 85vh;
-                    background: #111;
-                    border-radius: 24px;
-                    border: 1px solid rgba(255,255,255,0.1);
-                    display: flex;
-                    flex-direction: column;
+                .pd-fp-action-btn:hover {
+                    background: var(--primary-gold);
+                    color: #000;
+                }
+
+                .pd-fp-zoom-val {
+                    font-size: 0.9rem;
+                    font-weight: 600;
+                    color: #fff;
+                    min-width: 60px;
+                    text-align: center;
+                }
+
+                .pd-fp-close {
+                    width: auto !important;
+                    padding: 0 1.5rem;
+                    background: #ff4444 !important;
+                    border: none;
+                    font-size: 0.7rem;
+                    font-weight: 800;
+                    letter-spacing: 0.1rem;
+                }
+
+                /* ASYMMETRIC GALLERY */
+                .pd-gallery-section {
+                    padding: 6rem 0;
+                }
+
+                .pd-gallery-title {
+                    font-size: 1.2rem;
+                    letter-spacing: 0.3rem;
+                    color: var(--primary-gold) !important;
+                    font-weight: 800;
+                    margin-bottom: 4rem;
+                    text-align: center;
+                }
+
+                .pd-gallery-asymmetric-grid {
+                    display: grid;
+                    grid-template-columns: 1.5fr 1fr;
+                    gap: 1.5rem;
+                }
+
+                .pd-gallery-main-item {
+                    border-radius: 20px;
                     overflow: hidden;
+                    height: auto;
                 }
 
-                .pd-modal-toolbar {
-                    padding: 1.5rem 2rem;
-                    background: #151518;
-                    display: flex;
-                    justify-content: space-between;
-                    border-bottom: 1px solid rgba(255,255,255,0.08);
+                .pd-gallery-img-large {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 20px;
                 }
 
-                .pd-modal-title { font-weight: 900; letter-spacing: 0.1rem; display: block; font-size: 0.8rem; color: var(--primary-gold); }
-                .pd-modal-subtitle { font-size: 1rem; font-weight: 600; color: #fff; }
+                .pd-gallery-sub-grid {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1.5rem;
+                }
 
-                .pd-modal-actions { display: flex; align-items: center; gap: 0.8rem; }
-                .pd-modal-btn { background: #222; border: 1px solid #333; color: #fff; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-size: 0.8rem; font-weight: 800; }
-                .pd-close-btn { background: rgba(255,0,0,0.1); border-color: rgba(255,0,0,0.3); color: #ff8888; }
-                .pd-zoom-pill { font-size: 0.8rem; font-weight: 700; color: #fff; min-width: 50px; text-align: center; }
+                .pd-gallery-sub-item {
+                    border-radius: 16px;
+                    overflow: hidden;
+                    aspect-ratio: 1/1;
+                }
 
-                .pd-modal-viewport { flex: 1; position: relative; overflow: hidden; background: #000; display: flex; justify-content: center; }
-                .pd-pdf-container { position: relative; }
-                .pd-pdf-object { width: 100%; height: 100%; }
-                .pd-pan-shroud { position: absolute; inset: 0; z-index: 100; cursor: move; }
+                .pd-gallery-img-small {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
 
+                /* MAP SECTION */
+                .pd-map-section { padding: 8rem 0; background: #08080a; }
+                .pd-map-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 6rem; align-items: center; }
+                .pd-map-info { display: flex; flex-direction: column; gap: 1.5rem; }
+                .pd-section-label { color: var(--primary-gold); font-size: 0.8rem; font-weight: 800; letter-spacing: 0.2rem; }
+                .pd-section-header { font-size: 2.5rem; color: #fff; font-weight: 900; line-height: 1.2; }
+                .pd-map-desc { font-size: 1.1rem; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 2rem; }
+                .pd-map-desc strong { color: #fff; font-weight: 600; }
+                .pd-connectivity-list { display: flex; flex-direction: column; gap: 2rem; }
+                .pd-conn-item { display: flex; gap: 1.5rem; align-items: center; }
+                .pd-conn-icon { font-size: 2rem; width: 60px; height: 60px; background: rgba(255,255,255,0.03); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.05); }
+                .pd-conn-item strong { display: block; color: #fff; font-size: 1.1rem; margin-bottom: 0.3rem; }
+                .pd-conn-item p { color: rgba(255,255,255,0.4); font-size: 0.9rem; }
+                .pd-map-frame-container { box-shadow: 0 50px 100px rgba(0,0,0,0.5); border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
+                @media (max-width: 991px) {
+                    .pd-map-grid { grid-template-columns: 1fr; gap: 4rem; text-align: center; }
+                    .pd-map-info { align-items: center; }
+                    .pd-connectivity-list { align-items: flex-start; text-align: left; }
+                }
+
+                /* RESPONSIVE FIXES */
                 @media (max-width: 1200px) {
-                    .pd-master-grid { grid-template-columns: 1fr; gap: 3rem; }
-                    .pd-sidebar-col { order: -1; }
-                    .pd-sidebar-card { padding: 2rem; }
+                    .pd-master-grid { grid-template-columns: 1fr; gap: 4rem; }
+                    .pd-sidebar-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+                }
+
+                @media (max-width: 991px) {
+                    .pd-fp-main-display { grid-template-columns: 1fr; }
+                    .pd-fp-image-container { padding: 2rem; }
+                    .pd-gallery-asymmetric-grid { grid-template-columns: 1fr; }
+                    .pd-amenity-grid { grid-template-columns: repeat(2, 1fr); }
                 }
 
                 @media (max-width: 768px) {
-                    .pd-hero-container { height: 60vh; }
-                    .pd-main-title { font-size: 3.5rem; }
+                    .pd-sidebar-col { grid-template-columns: 1fr; }
+                    .pd-hero-container { height: 70vh; }
+                    .pd-main-title { font-size: clamp(2.5rem, 12vw, 4rem); }
                     .pd-hero-tagline { font-size: 1.1rem; }
-                    .pd-glass-card { padding: 2rem; }
+                    .pd-glass-card { padding: 1.8rem; }
                     .pd-section-header { font-size: 1rem; margin-bottom: 1.5rem; }
-                    .pd-gallery-masonry { grid-template-columns: 1fr; }
-                    .pd-gallery-section { padding: 4rem 0; }
-                    
-                    .pd-fp-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-                    .pd-fp-tabs { width: 100%; justify-content: space-between; }
-                    .pd-fp-tab { flex: 1; text-align: center; }
+                    .pd-description { font-size: 1rem; line-height: 1.7; }
+                    .pd-highlights-container { grid-template-columns: 1fr; }
+                    .pd-spec-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+                    .pd-amenity-grid { grid-template-columns: 1fr; }
+                    .pd-fp-main-display { gap: 2rem; }
+                    .pd-fp-info-container { padding: 1.5rem; }
+                    .pd-fp-spec-value { font-size: 0.85rem; }
+                    .pd-fp-spec-label { font-size: 0.6rem; }
+                    .pd-fp-lightbox-toolbar { padding: 1rem; flex-direction: column; gap: 1rem; text-align: center; }
+                    .pd-fp-lightbox-actions { gap: 0.8rem; }
+                    .pd-fp-action-btn { width: 35px; height: 35px; }
 
-                    .pd-modal-content { height: 95vh; width: 95%; border-radius: 12px; }
-                    .pd-modal-toolbar { padding: 1rem; flex-direction: column; gap: 1rem; }
-                    .pd-modal-actions { width: 100%; justify-content: space-between; }
-
-                    .pd-fp-lightbox-overlay { 
-                        background: rgba(255, 255, 255, 0); 
-                        padding: 20px; 
-                        display: flex; 
+                    .pd-fp-controls-container { 
                         flex-direction: column; 
-                        align-items: center; 
-                        justify-content: center; 
-                        backdrop-filter: blur(20px);
-                        pointer-events: none;
+                        gap: 2rem; 
+                        padding: 1rem; 
+                        width: 100%; 
                     }
-                    .pd-fp-lightbox-content { 
-                        height: 281px; 
-                        width: 370px; 
-                        max-width: 95vw; 
-                        border-radius: 16px; 
-                        background: #fff; 
-                        box-shadow: 0 40px 100px rgba(0,0,0,0.15);
-                        border: 1px solid rgba(0,0,0,0.05);
-                        overflow: hidden;
-                        display: flex;
-                        flex-direction: column;
-                        position: relative;
-                        pointer-events: auto;
-                    }
-                    .pd-fp-lightbox-toolbar { display: none; }
-                    .pd-fp-lightbox-viewport { 
-                        background: #fff; 
-                        flex: 1;
-                        height: 100%;
-                        width: 100%;
-                    }
-                    .pd-mobile-fp-close { 
-                        display: flex;
-                        position: relative;
-                        margin: 0 auto 15px auto;
-                        z-index: 9999;
-                        padding: 12px 30px;
-                        background: #111;
-                        color: var(--primary-gold);
-                        border: 2px solid var(--primary-gold);
-                        border-radius: 12px;
-                        align-items: center;
-                        justify-content: center;
-                        font-size: 0.9rem;
+                    .pd-mobile-fp-close {
+                        display: block;
+                        position: absolute;
+                        bottom: 2rem;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        z-index: 100;
+                        background: #000;
+                        color: #fff;
+                        padding: 0.8rem 2rem;
+                        border-radius: 50px;
                         font-weight: 800;
-                        letter-spacing: 0.05rem;
+                        font-size: 0.7rem;
+                        letter-spacing: 0.1rem;
                         text-transform: uppercase;
-                        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-                        pointer-events: auto;
-                        transition: all 0.3s ease;
+                        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
                     }
-                    .pd-mobile-fp-close:active {
-                        transform: scale(0.95);
-                        background: var(--primary-gold);
-                        color: #000;
-                    }
-                    .pd-fp-zoom-img { max-width: 100%; max-height: 100%; }
                 }
 
                 @media (max-width: 480px) {
-                    .pd-main-title { font-size: 2.8rem; }
+                    .pd-hero-content { margin-top: 10vh; }
                     .pd-status-tag { padding: 0.4rem 1rem; font-size: 0.6rem; }
-                    .pd-amenity-grid { grid-template-columns: 1fr; }
-                    .pd-description { font-size: 1rem; line-height: 1.7; }
-                    .pd-sum-val { font-size: 0.85rem; }
-                    .pd-fp-viewport { height: 200px; padding: 1rem; }
-                    .pd-sum-row { padding: 0.8rem 0; }
+                    .pd-main-title { font-size: 2.2rem; }
+                    .pd-glass-card { padding: 1.2rem; }
                 }
             `}</style>
     </motion.div>
